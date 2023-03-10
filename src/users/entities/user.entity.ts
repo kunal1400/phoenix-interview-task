@@ -28,7 +28,7 @@ export class User {
   email: string;
 
   @Field(() => String)
-  @Prop({ type: String })
+  @Prop({ type: String, default: '' })
   message: string;
 }
 

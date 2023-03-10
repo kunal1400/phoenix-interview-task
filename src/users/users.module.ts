@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { UsersResolver } from './users.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './entities/user.entity';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { User, UserSchema } from './entities/user.entity';
         schema: UserSchema,
       },
     ]),
+    HttpModule,
   ],
   providers: [UsersResolver, UsersService],
 })
