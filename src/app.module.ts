@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ScheduleModule } from '@nestjs/schedule';
 import { join } from 'path';
 import { UsersModule } from './users/users.module';
 
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
       playground: true,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
+    ScheduleModule.forRoot(),
     UsersModule,
   ],
 })

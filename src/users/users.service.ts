@@ -1,6 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { Cron } from '@nestjs/schedule';
 import { Model } from 'mongoose';
 import { lastValueFrom } from 'rxjs';
 import { CreateUserInput } from './dto/create-user.input';
@@ -52,5 +53,24 @@ export class UsersService {
     } else {
       return userData;
     }
+  }
+
+  @Cron('59 * * * * *')
+  async handleCron() {
+    const currentdate = new Date();
+    const datetime =
+      'automated - ' +
+      currentdate.getDate() +
+      '-' +
+      +(currentdate.getMonth() + 1) +
+      '-' +
+      +currentdate.getFullYear() +
+      ' ' +
+      +currentdate.getHours() +
+      ':' +
+      +currentdate.getMinutes() +
+      ':' +
+      +currentdate.getSeconds();
+    return await this.userModel.updateMany({ message: datetime });
   }
 }
